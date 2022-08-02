@@ -1,0 +1,74 @@
+iframe {
+    display: none;
+}
+
+body {
+    overflow: hidden;
+}
+
+.map {
+    height: 100vh;
+}
+
+#mainNav {
+    user-select: none;
+    background: darkred;
+    border-bottom: 2px solid white;
+    #menuLogo {
+        filter: invert(100%);
+        width: 40px;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+            filter: none;
+        }
+    }
+}
+
+@mixin centered(){
+    margin: 0;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+#login {
+    display: none;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background: darkred;
+    position: absolute;
+    #backgroundImg {
+        @include centered();
+        opacity: .2;
+        height: 100%;
+    }
+    .title {
+        filter: drop-shadow(0 0 30px black);
+        font-size: 10vw;
+        margin-bottom: 5vh;
+    }
+    .access {
+        filter: drop-shadow(0 0 10px black);
+        font-size: 2.5vw;
+    }
+    #gButton {
+        display:flex;
+        justify-content: center;
+        margin-top: 1vh;
+        margin-bottom: 8vh;
+    }
+    #loginContainer {
+        @include centered();
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .title {
+        font-size: 120px !important;
+    }
+    .access {
+        font-size: 30px !important;
+    }
+}

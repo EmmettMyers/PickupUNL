@@ -1,0 +1,178 @@
+.modal-width {
+  width: 70vw !important;
+  max-width: 800px !important;
+  min-width: 550px !important;
+}
+
+#modalTop {
+  background: #f0b9b9;
+}
+
+#modalTop #modalTitle {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: darkred;
+  font-size: 30px;
+}
+
+.info {
+  font-size: 15px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.sports {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.sports img {
+  margin-right: 5px;
+}
+
+.sports #basketball, .sports #volleyball, .sports #baseball, .sports #tennisball {
+  width: 30px;
+  height: 30px;
+}
+
+.sports #soccerball {
+  width: 34px;
+  height: 33px;
+}
+
+.sports #football {
+  width: 43px;
+  height: 30px;
+}
+
+.signupList {
+  width: 42%;
+  overflow-y: auto;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  background: #f0b9b9;
+}
+
+.signupList .listTitle {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: white;
+  font-weight: 600;
+  background: darkred;
+}
+
+.signupList .signupBtn {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: seagreen !important;
+  border: none;
+}
+
+.signupList .signupBtn:hover {
+  -webkit-filter: brightness(130%);
+          filter: brightness(130%);
+}
+
+.chatRoom {
+  width: 54%;
+  overflow-y: auto;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  background: lightgrey;
+}
+
+.chatRoom .chatTitle {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: white;
+  font-weight: 600;
+  background: gray;
+}
+
+.chatRoom .chatBtn {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background: dodgerblue !important;
+  border: none;
+}
+
+.chatRoom .chatBtn:hover {
+  -webkit-filter: brightness(130%);
+          filter: brightness(130%);
+}
+
+.playerInfo {
+  border: 2px solid goldenrod;
+  height: 40px;
+  width: 100%;
+  background: gold;
+}
+
+.playerInfo .playerName {
+  line-height: 34px;
+}
+
+.myHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 5px;
+}
+
+.myHolder .myChat {
+  background: #a5c9e9;
+  text-align: right;
+  max-width: 70%;
+  overflow-wrap: break-word;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: black;
+  display: inline-block;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.theirHolder {
+  padding: 5px;
+}
+
+.theirHolder .theirChat {
+  background: darkseagreen;
+  text-align: left;
+  max-width: 70%;
+  overflow-wrap: break-word;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: black;
+  display: inline-block;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.theirHolder .theirChatName {
+  font-size: 12px;
+  color: darkgreen;
+  margin-left: 5px;
+}
+/*# sourceMappingURL=App.css.map */

@@ -1,0 +1,98 @@
+iframe {
+  display: none;
+}
+
+body {
+  overflow: hidden;
+}
+
+.map {
+  height: 100vh;
+}
+
+#mainNav {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: darkred;
+  border-bottom: 2px solid white;
+}
+
+#mainNav #menuLogo {
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+  width: 40px;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+#mainNav #menuLogo:hover {
+  -webkit-filter: none;
+          filter: none;
+}
+
+#login {
+  display: none;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background: darkred;
+  position: absolute;
+}
+
+#login #backgroundImg {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  opacity: .2;
+  height: 100%;
+}
+
+#login .title {
+  -webkit-filter: drop-shadow(0 0 30px black);
+          filter: drop-shadow(0 0 30px black);
+  font-size: 10vw;
+  margin-bottom: 5vh;
+}
+
+#login .access {
+  -webkit-filter: drop-shadow(0 0 10px black);
+          filter: drop-shadow(0 0 10px black);
+  font-size: 2.5vw;
+}
+
+#login #gButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 1vh;
+  margin-bottom: 8vh;
+}
+
+#login #loginContainer {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .title {
+    font-size: 120px !important;
+  }
+  .access {
+    font-size: 30px !important;
+  }
+}
+/*# sourceMappingURL=index.css.map */
