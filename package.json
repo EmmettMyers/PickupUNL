@@ -1,7 +1,6 @@
 {
   "name": "e_pickupunl",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,11 +11,21 @@
   "dependencies": {
     "bootstrap": "^5.2.0",
     "express": "^4.18.1",
+    "firebase": "^9.9.2",
     "mysql": "^2.18.1",
     "ol": "^6.15.1",
     "react-bootstrap": "^2.4.0",
     "react-router-dom": "^6.3.0",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmettMyers/e_pickupunl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EmmettMyers/e_pickupunl/issues"
+  },
+  "homepage": "https://github.com/EmmettMyers/e_pickupunl#readme",
+  "description": ""
 }

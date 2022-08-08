@@ -1,12 +1,11 @@
-iframe {
-    display: none;
-}
-
 body {
     overflow: hidden;
 }
 
 .map {
+    z-index: -1;
+    position: absolute;
+    top: 60px;
     height: 100vh;
 }
 
@@ -19,8 +18,26 @@ body {
         width: 40px;
         cursor: pointer;
         transition: 0.2s;
-        &:hover {
+        &:hover, &.active {
             filter: none;
+        }
+    }
+    .dropdown-menu {
+        filter: drop-shadow(0 0 5px grey);
+        min-width: 120px !important;
+        margin: 8px;
+        background: white !important;
+        border: 3px solid darkred;
+        .dropdown-item {
+            cursor: pointer;
+            text-align: center;
+            color: darkred;
+            font-weight: bold;
+            transition: 0.2s;
+            &:hover {
+                background: white !important;
+                color: black;
+            }
         }
     }
 }
@@ -52,15 +69,83 @@ body {
         filter: drop-shadow(0 0 10px black);
         font-size: 2.5vw;
     }
-    #gButton {
-        display:flex;
-        justify-content: center;
+    #google {
+        width: 25vw;
+        max-width: 300px;
+        background: white;
         margin-top: 1vh;
         margin-bottom: 8vh;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover { filter: brightness(80%); }
     }
     #loginContainer {
         @include centered();
         text-align: center;
+    }
+}
+
+#search {
+    width: 100%;
+    height: auto;
+    background: grey;
+    border-bottom: 2px solid black;
+    #selectSport {
+        margin-top: 8px;
+        margin-left: 15px;
+        height: 35px;
+        font-size: 15px;
+        width: 20vw;
+        min-width: 130px;
+        max-width: 300px;
+    }
+    #selectTime, #selectSetting {
+        @extend #selectSport;
+        margin-left: 5px;
+    }
+    .btn {
+        width: 75px;
+        height: 40px;
+        margin-top: 6px;
+        margin-left: 10px;
+        background: lime;
+        transition: 0.3s;
+        border: 0;
+        &:hover {
+            filter: brightness(85%);
+        }
+    }
+    #close {
+        right: 7px;
+        transition: 0.2s;
+        cursor: pointer;
+        &:hover {
+            color: white;
+        }
+    }
+    #resultArea {
+        background: gold;
+        margin-top: 3px;
+        border-top: 2px solid black;
+        .titles div {
+            font-weight: 700;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+        .result {
+            div {
+                background: white;
+                width: 100%;
+                padding: 5px;
+                border: 1px solid black;
+            }
+        }
+    }
+    #noResults {
+        background: gold;
+        margin-top: 3px;
+        border-top: 2px solid black;
     }
 }
 

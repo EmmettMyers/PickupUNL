@@ -71,32 +71,28 @@
     overflow-y: scroll;
 }
 
-#putSignup{ 
+.signupList {
+    @include interactBox(rgb(240, 185, 185));
     width: 42%;
-    .signupList {
-        @include interactBox(rgb(240, 185, 185));
-        .listTitle { @include title(darkred); }
-        .signupBtn { @include button(seagreen); }
-        #signupArea {
-            @include area();
-            #insertPlayers { @include insert(); }
-        }
+    .listTitle { @include title(darkred); }
+    .signupBtn { @include button(seagreen); }
+    #signupArea {
+        @include area();
+        #insertPlayers { @include insert(); }
     }
 }
 
-#putChatBox { 
+.chatRoom {
+    @include interactBox(lightgrey);
     width: 54%; 
-    .chatRoom {
-        @include interactBox(lightgrey);
-        .chatTitle { @include title(gray); }
-        .chatBtn { @include button(dodgerblue); }
-        #chatArea {
-            @include area();
-            overflow: hidden;
-            #insertChats {
-                @include insert();
-                height: 315px;
-            }
+    .chatTitle { @include title(gray); }
+    .chatBtn { @include button(dodgerblue); }
+    #chatArea {
+        @include area();
+        overflow: hidden;
+        #insertChats {
+            @include insert();
+            height: 315px;
         }
     }
 }

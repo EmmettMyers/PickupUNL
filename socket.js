@@ -33,21 +33,54 @@ io.on('connection', (socket) => {
     socket.on('getChats', (cts) =>     {
         var sql = "SELECT sender,content FROM chats WHERE facility='"+cts[0]+"' AND sport='"+cts[1]+"' AND time='"+cts[2]+"'";
         con.query(sql, function (err, result) {
-            if (err) throw err;
-            var dataToSendToClient = result;
-            var JSONdata = JSON.stringify(dataToSendToClient);
-            io.emit('getChats', `${JSONdata}` );   
+          if (err) throw err;
+          var dataToSendToClient = result;
+          var JSONdata = JSON.stringify(dataToSendToClient);
+          io.emit('getChats', `${JSONdata}` );   
         });  
     });
 
     socket.on('getSignups', (pys) =>     {
         var sql = "SELECT user FROM signup WHERE facility='"+pys[0]+"' AND sport='"+pys[1]+"' AND time='"+pys[2]+"'";
         con.query(sql, function (err, result) {
-            if (err) throw err;
-            var JSONdata = JSON.stringify(result);
-            io.emit('getSignups', `${JSONdata}` );
+          if (err) throw err;
+          var JSONdata = JSON.stringify(result);
+          io.emit('getSignups', `${JSONdata}` );
         });
     });
+
+    socket.on('search', (par) =>     {
+      var sql;
+      sql = "SELECT * FROM signup WHERE ";
+      if (par[0])
+        sql += " sport='"+par[0]+"'";
+      if (par[1])
+        (par[0]) ? sql += " AND time='"+par[1]+"'" : sql += " time='"+par[1]+"'";;
+      if (par[2]){
+        var insert = "";
+        if (par[2] == "out") insert = "NOT ";
+        (par[0]||par[1]) ? sql += " AND facility "+insert+"LIKE '%Recreation%'" : sql += " AND facility "+insert+"LIKE '%Recreation%'";
+      }
+      if (!par[0] && !par[1] && !par[2])
+        sql = "SELECT * FROM signup";
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        var peoplePlaces = [];
+        for (var x = 0; x < result.length; x++){
+          var placeObj = [result[x].facility, result[x].time, result[x].sport];
+          var y = 0;
+          if (peoplePlaces.length == 0){
+            peoplePlaces.push(placeObj);
+          } else {
+            for (var y = 0; y < peoplePlaces.length; y++){
+              if (JSON.stringify(peoplePlaces[y]) === JSON.stringify(placeObj)) break;
+              else if (y == peoplePlaces.length-1) peoplePlaces.push(placeObj);
+            }
+          }
+        }
+        io.emit('getSearch', peoplePlaces);
+      });
+  });
 
 });
 

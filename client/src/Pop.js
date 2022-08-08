@@ -1,12 +1,13 @@
 import './scss/App.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom/client';
 import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-//import GoogleButton from 'react-google-button';
+import { io } from "socket.io-client";
+import getUser from './firebase';
 
 const socket = io('ws://localhost:8080');
 
@@ -80,13 +81,30 @@ function showInteract(){
   if (sport && time){
     interact.render(
       <div className="mt-4 mb-2 d-flex justify-content-between">
-        <div id="putSignup"></div>
-        <div id="putChatBox"></div>
+        <div className="rounded signupList">
+          <div className="m-0 pt-2 pb-2 w-100 text-center h5 listTitle">Player List (<span id="playerNum"></span>)</div>
+          <div id="signupArea">
+            <div id="insertPlayers"></div>
+          </div>
+          <Button onClick={e=>{signupPlayer();}} className="position-absolute bottom-0 w-100 fw-bold signupBtn">Click here to signup</Button>
+        </div>
+        <div className="rounded chatRoom">
+          <div className="m-0 pt-2 pb-2 w-100 text-center h5 chatTitle">Chat Room</div>
+          <div id="chatArea">
+            <div id="insertChats"></div>
+          </div>
+          <InputGroup className="position-absolute bottom-0 m-1">
+            <Form.Control id="chatBox"/><Button onClick={e=>{sendChat();}} className="me-2 chatBtn">Send</Button>
+          </InputGroup>
+        </div>
       </div>
     );
     var setting = [place,sport,time];
     socket.emit('getChats', setting);
     socket.emit('getSignups', setting);
+    setTimeout(function(){
+      document.getElementById("lastChat").scrollIntoView(); // {behavior:'smooth'}
+    }, 10);
   }
   else {
     interact.render();
@@ -100,16 +118,11 @@ socket.on('signup', text => {
 
 socket.on('getSignups', text => {
   var signup = JSON.parse(text);
-  const signArea = ReactDOM.createRoot(document.getElementById('putSignup'));
+  const signArea = ReactDOM.createRoot(document.getElementById('insertPlayers'));
+  document.getElementById("playerNum").innerHTML = signup.length;
   signArea.render(
-    <div className="rounded signupList">
-      <div className="m-0 pt-2 pb-2 w-100 text-center h5 listTitle">Player List ({signup.length})</div>
-      <div id="signupArea">
-        <div id="insertPlayers">
-        {signup && signup.map(player => <Signee name={player.user}/>)}
-        </div>
-      </div>
-      <Button onClick={e=>{signupPlayer();}} className="position-absolute bottom-0 w-100 fw-bold signupBtn">Click here to signup</Button>
+    <div>
+      {signup && signup.map(player => <Signee name={player.user}/>)}
     </div>
   );
 });
@@ -123,7 +136,7 @@ function Signee(player){
 }
 
 function signupPlayer(){
-  var signee = ["Dean",place,sport,time];
+  var signee = [getUser(),place,sport,time];
   socket.emit('signup', signee);
 }
 
@@ -137,24 +150,17 @@ socket.on('message', text => {
 socket.on('getChats', text => {
   sender = "";
   var chats = JSON.parse(text);
-  const chatArea = ReactDOM.createRoot(document.getElementById('putChatBox'));
+  const chatArea = ReactDOM.createRoot(document.getElementById('insertChats'));
   chatArea.render(
-    <div className="rounded chatRoom">
-      <div className="m-0 pt-2 pb-2 w-100 text-center h5 chatTitle">Chat Room</div>
-      <div id="chatArea">
-        <div id="insertChats">
-        {chats && chats.map(chat => <Message sender={chat.sender} content={chat.content}/>)}
-        </div>
-      </div>
-      <InputGroup className="position-absolute bottom-0 m-1">
-        <Form.Control id="chatBox"/><Button onClick={e=>{sendChat();}} className="me-2 chatBtn">Send</Button>
-      </InputGroup>
+    <div>
+      {chats && chats.map(chat => <Message sender={chat.sender} content={chat.content}/>)}
+      <div id="lastChat"></div>
     </div>
   );
 });
 
 function Message(chat){
-  if (chat.sender == "Samuel"){
+  if (chat.sender == getUser()){
     sender = chat.sender;
     return (
       <div className="myHolder"><div className="myChat">{chat.content}</div></div>
@@ -180,69 +186,8 @@ function Message(chat){
 function sendChat(){
   var content = document.getElementById("chatBox").value;
   document.getElementById("chatBox").value = "";
-  var chat = ["Dean",place,sport,time,content];
+  var chat = [getUser(),place,sport,time,content];
   socket.emit('message', chat);
 }
 
 export default Pop;
-
-/*fetch('/sendChat', { 
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      sender: "Samuel",
-      facility: place,
-      sport: sport,
-      time: time,
-      content: content
-    })
-  });*/
-
-/*function showSignees(){
-  fetch('/signups', { 
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      facility: place,
-      sport: sport,
-      time: time
-    })
-  }).then(res => res.json()).then(signup => {
-    const signArea = ReactDOM.createRoot(document.getElementById('putSignup'));
-    signArea.render(
-      <div className="rounded signupList">
-        <div className="m-0 pt-2 pb-2 w-100 text-center h5 listTitle">Player List ({signup.length})</div>
-        <div id="signupArea">
-          <div id="insertPlayers">
-          {signup && signup.map(player => <Signee name={player.user}/>)}
-          </div>
-        </div>
-        <Button onClick={e=>{signupPlayer();}} className="position-absolute bottom-0 w-100 fw-bold signupBtn">Click here to signup</Button>
-      </div>
-    );
-  });
-}
-
-function showChats(){
-  fetch('/chats', { 
-    method: 'POST', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      facility: place,
-      sport: sport,
-      time: time
-    })
-  }).then(res => res.json()).then(chats => {
-    const chatArea = ReactDOM.createRoot(document.getElementById('putChatBox'));
-    chatArea.render(
-      <div className="rounded chatRoom">
-          <div className="m-0 pt-2 pb-2 w-100 text-center h5 chatTitle">Chat Room</div>
-          <div id="chatArea">
-            <div id="insertChats">
-            {chats && chats.map(chat => <Message sender={chat.sender} content={chat.content}/>)}
-            </div>
-          </div>
-          <InputGroup className="position-absolute bottom-0 m-1">
-            <Form.Control id="chatBox"/><Button onClick={e=>{sendChat();}} className="me-2 chatBtn">Send</Button>
-          </InputGroup>
-        </div>
-    );
-  });
-}*/
