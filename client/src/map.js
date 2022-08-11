@@ -35,11 +35,14 @@ const circle = new Style({
     }),
 });
 
-const map = new Map({
+let zoom;
+(window.innerWidth <= 500) ? zoom = 13.75 : zoom = 14.5;
+
+let map = new Map({
   target: 'map',
   view: new View({
     center: campus,
-    zoom: 14.5,
+    zoom: zoom,
   }),
   layers: [
     new TileLayer({ source: new OSM(), }),
@@ -59,7 +62,7 @@ map.on('click', function (event){
   if (map.hasFeatureAtPixel(event.pixel)) {
     var xVal = event.coordinate[0].toFixed(3)*-1;
     var yVal = event.coordinate[1].toFixed(3);
-    var facility; var address; var inoutDoor; var sports;
+    var facility;
     if (xVal==96.702 || xVal==96.703){ 
       facility = {
         name: "UNL Campus Recreation Center",

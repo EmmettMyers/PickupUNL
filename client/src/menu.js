@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { io } from "socket.io-client";
 
-const socket = io('ws://localhost:8080');
+const socket = io.connect("http://localhost:5000");
 
 document.getElementById("searchBtn").addEventListener("click", function() {
+    document.getElementById("profileArea").style.display = "none";
     document.getElementById("search").style.display = "block";
 });
 
-document.getElementById("close").addEventListener("click", function() {
+document.getElementById("searchClose").addEventListener("click", function() {
     document.getElementById("search").style.display = "none";
     document.getElementById("resultArea").style.display = "none";
     document.getElementById("noResults").style.display = "none";
@@ -55,7 +56,21 @@ function Result(place){
 }
 
 document.getElementById("profileBtn").addEventListener("click", function() {
-    alert("profile");
+    document.getElementById("search").style.display = "none";
+    document.getElementById("profileArea").style.display = "block";
+});
+
+document.getElementById("profileClose").addEventListener("click", function() {
+    document.getElementById("profileArea").style.display = "none";
+});
+
+document.getElementById("enterProfile").addEventListener("click", function() {
+    var desc = document.getElementById("typeDescription").value;
+    var age = document.getElementById("selectAge").value;
+    var type = document.getElementById("selectType").value;
+    var newProfile = [localStorage.getItem('id'),age,type,desc];
+    socket.emit('setProfile', newProfile);
+    document.getElementById("profileArea").style.display = "none";
 });
 
 document.getElementById("logoutBtn").addEventListener("click", function() {

@@ -7,16 +7,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { io } from "socket.io-client";
-import getUser from './firebase';
 
-const socket = io('ws://localhost:8080');
+//const socket = io.connect(window.location.protocol + "//" + document.domain + ":" + window.location.port);
+const socket = io.connect("http://localhost:5000");
 
 var place;
 var sport;
 var time;
 
 function Pop(facility){
-  
+
   place = facility.name;
   sport = ""; time = "";
   const [modalShow, setModalShow] = useState(true);
@@ -29,7 +29,7 @@ function Pop(facility){
         <Modal.Title id="modalTitle" className="fw-bold">{facility.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="d-flex justify-content-between">
+        <div className="tagHolder">
           <p className="info">{facility.inoutDoor}&emsp;&diams;&emsp;{facility.address}</p>
           <div className="sports">
             {sports.includes("Basketball") && <img id="basketball" src="https://www.freeiconspng.com/thumbs/basketball-png/basketball-png-19.png"></img>}
@@ -41,7 +41,7 @@ function Pop(facility){
           </div>
         </div>
         <div className="mt-2 d-flex justify-content-between">
-          <Form.Select className="me-3" onChange={e => { sport = e.target.value; showInteract(); }} >
+          <Form.Select className="me-3" onChange={e => { sport = e.target.value; tryInteract(); }} >
             <option value="">Sport</option>
               {sports.includes("Basketball") && <option value="basketball">Basketball</option>}
               {sports.includes("Volleyball") && <option value="volleyball">Volleyball</option>}
@@ -50,7 +50,7 @@ function Pop(facility){
               {sports.includes("Football") && <option value="football">Football</option>}
               {sports.includes("Tennis") && <option value="tennis">Tennis</option>}
           </Form.Select>
-          <Form.Select onChange={e => { time = e.target.value; showInteract(); }} >
+          <Form.Select onChange={e => { time = e.target.value; tryInteract(); }} >
             <option value="">Time</option>
             <option value="7a">7:00 A.M.</option>
             <option value="8a">8:00 A.M.</option>
@@ -68,52 +68,92 @@ function Pop(facility){
             <option value="8p">8:00 P.M.</option>
           </Form.Select>
         </div>
-        <div id="interact">
-        </div>
+        <div id="interact"></div>
+        <div id="insertProfile"></div>
       </Modal.Body>
     </Modal>
   );
 
 };;
 
-function showInteract(){
-  const interact = ReactDOM.createRoot(document.getElementById('interact'));
-  if (sport && time){
-    interact.render(
-      <div className="mt-4 mb-2 d-flex justify-content-between">
-        <div className="rounded signupList">
-          <div className="m-0 pt-2 pb-2 w-100 text-center h5 listTitle">Player List (<span id="playerNum"></span>)</div>
-          <div id="signupArea">
-            <div id="insertPlayers"></div>
-          </div>
-          <Button onClick={e=>{signupPlayer();}} className="position-absolute bottom-0 w-100 fw-bold signupBtn">Click here to signup</Button>
-        </div>
-        <div className="rounded chatRoom">
-          <div className="m-0 pt-2 pb-2 w-100 text-center h5 chatTitle">Chat Room</div>
-          <div id="chatArea">
-            <div id="insertChats"></div>
-          </div>
-          <InputGroup className="position-absolute bottom-0 m-1">
-            <Form.Control id="chatBox"/><Button onClick={e=>{sendChat();}} className="me-2 chatBtn">Send</Button>
-          </InputGroup>
-        </div>
-      </div>
-    );
-    var setting = [place,sport,time];
-    socket.emit('getChats', setting);
-    socket.emit('getSignups', setting);
-    setTimeout(function(){
-      document.getElementById("lastChat").scrollIntoView(); // {behavior:'smooth'}
-    }, 10);
-  }
-  else {
+function tryInteract(){
+  if (sport && time){ 
+    socket.emit('canSignup', [place, sport, time, localStorage.getItem('id')]);
+  } else {
+    const interact = ReactDOM.createRoot(document.getElementById('interact'));
     interact.render();
   }
 }
 
-socket.on('signup', text => {
+socket.on('showInteract', canSignup => {
+  const interact = ReactDOM.createRoot(document.getElementById('interact'));
+  var button;
+  if (canSignup == 'true')
+    button = <Button onClick={e=>{signupPlayer();}} className="position-absolute bottom-0 w-100 fw-bold signupBtn">Click to signup</Button>;
+  else 
+    button = <Button onClick={e=>{unsignupPlayer();}} className="position-absolute bottom-0 w-100 fw-bold unsignupBtn">Click to remove signup</Button>;
+  interact.render(
+    <div className="mt-4 mb-2 d-flex justify-content-between">
+      <div className="rounded signupList">
+        <div className="m-0 pt-2 pb-2 w-100 text-center h5 listTitle">Player List (<span id="playerNum"></span>)</div>
+        <div id="signupArea">
+          <div id="insertPlayers"></div>
+        </div>
+        {button}
+      </div>
+      <div className="rounded chatRoom">
+        <div className="m-0 pt-2 pb-2 w-100 text-center h5 chatTitle">Chat Room</div>
+        <div id="chatArea">
+          <div id="insertChats"></div>
+        </div>
+        <InputGroup className="position-absolute bottom-0 m-1">
+          <Form.Control id="chatBox"/><Button onClick={e=>{sendChat();}} className="me-2 chatBtn">Send</Button>
+        </InputGroup>
+      </div>
+    </div>
+  );
   var setting = [place,sport,time];
+  socket.emit('getChats', setting);
   socket.emit('getSignups', setting);
+  setTimeout(function(){
+    document.getElementById("lastChat").scrollIntoView(); // {behavior:'smooth'}
+  }, 10);
+});
+
+socket.on('showProfile', text => {
+  var prof = JSON.parse(text);
+  const profile = ReactDOM.createRoot(document.getElementById('insertProfile'));
+  profile.render(
+    <div id="profile" className="rounded">
+      <div id="close" className="fw-bold h2" onClick={e=>{hideProfile();}}>X</div>
+      <div className="d-flex w-100">
+        <img id="picture" className="rounded-circle mt-2 ms-3" src={prof[0].picture}></img>
+        <div className="ms-3">
+          <div id="name" className="fw-bold text-white h2">{prof[0].user}</div>
+          <div id="email" className="text-white fs-6">{prof[0].email}</div>
+        </div>
+      </div>
+      <div className="d-flex justify-content-evenly mt-2">
+        {prof[0].age != 0 && <div id="age" className="text-white fs-6">Age:&emsp;{prof[0].age}</div>}
+        {prof[0].competition && <div id="competition" className="text-white fs-6">Play Type:&emsp;{prof[0].competition}</div>}
+      </div>
+      {prof[0].description && <div id="line"></div>}
+      {prof[0].description && <div id="description" className="mt-2 ms-2 text-white fs-6">{prof[0].description}</div>}
+    </div>
+  );
+  setTimeout(function(){
+    if (prof[0].age == 0 && prof[0].description == "" && prof[0].competition == "")
+      document.getElementById('profile').style.height = "125px";
+  }, 10);
+});
+
+function hideProfile(){
+  const profile = ReactDOM.createRoot(document.getElementById('insertProfile'));
+  profile.render();
+}
+
+socket.on('signup', text => {
+  socket.emit('canSignup', [place, sport, time, localStorage.getItem('id')]);
 });
 
 socket.on('getSignups', text => {
@@ -122,22 +162,27 @@ socket.on('getSignups', text => {
   document.getElementById("playerNum").innerHTML = signup.length;
   signArea.render(
     <div>
-      {signup && signup.map(player => <Signee name={player.user}/>)}
+      {signup && signup.map(player => <Signee name={player.user} id={player.id}/>)}
     </div>
   );
 });
 
 function Signee(player){
   return (
-    <div className="playerInfo">
+    <div className="playerInfo" onClick={e=>{ socket.emit('getProfile', player.id); }}>
       <div className="text-center fw-bold playerName">{player.name}</div>
     </div>
   );
 }
 
 function signupPlayer(){
-  var signee = [getUser(),place,sport,time];
+  var signee = [localStorage.getItem("user"),place,sport,time,localStorage.getItem("id")];
   socket.emit('signup', signee);
+}
+
+function unsignupPlayer(){
+  var signee = [place,sport,time,localStorage.getItem("id")];
+  socket.emit('unSignup', signee);
 }
 
 var sender;
@@ -160,7 +205,7 @@ socket.on('getChats', text => {
 });
 
 function Message(chat){
-  if (chat.sender == getUser()){
+  if (chat.sender == localStorage.getItem("user")){
     sender = chat.sender;
     return (
       <div className="myHolder"><div className="myChat">{chat.content}</div></div>
@@ -186,7 +231,7 @@ function Message(chat){
 function sendChat(){
   var content = document.getElementById("chatBox").value;
   document.getElementById("chatBox").value = "";
-  var chat = [getUser(),place,sport,time,content];
+  var chat = [localStorage.getItem("user"),place,sport,time,content];
   socket.emit('message', chat);
 }
 

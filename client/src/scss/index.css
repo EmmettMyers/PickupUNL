@@ -1,5 +1,6 @@
 body {
   overflow: hidden;
+  background: darkred;
 }
 
 .map {
@@ -80,12 +81,20 @@ body {
           filter: drop-shadow(0 0 30px black);
   font-size: 10vw;
   margin-bottom: 5vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #login .access {
   -webkit-filter: drop-shadow(0 0 10px black);
           filter: drop-shadow(0 0 10px black);
   font-size: 2.5vw;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #login #google {
@@ -97,6 +106,7 @@ body {
   cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  border-radius: 10px;
 }
 
 #login #google:hover {
@@ -151,14 +161,14 @@ body {
           filter: brightness(85%);
 }
 
-#search #close {
+#search #searchClose {
   right: 7px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   cursor: pointer;
 }
 
-#search #close:hover {
+#search #searchClose:hover {
   color: white;
 }
 
@@ -188,12 +198,118 @@ body {
   border-top: 2px solid black;
 }
 
+#profileArea {
+  width: 100%;
+  height: auto;
+  background: grey;
+  border-bottom: 2px solid black;
+}
+
+#profileArea #profileClose {
+  right: 7px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+#profileArea #profileClose:hover {
+  color: white;
+}
+
+#profileArea #profileLine {
+  width: 100%;
+  height: 2px;
+  background: black;
+}
+
+#profileArea #changeArea {
+  background: lightgrey;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+
+#profileArea #changeArea #selectAge, #profileArea #changeArea #selectType, #profileArea #changeArea #typeDescription {
+  margin-top: 5px;
+  margin-left: 10px;
+  height: 35px;
+  font-size: 15px;
+  width: 60px;
+}
+
+#profileArea #changeArea #selectType {
+  width: 20vw;
+  min-width: 130px;
+  max-width: 300px;
+}
+
+#profileArea #changeArea #typeDescription {
+  width: 65vw;
+  min-width: 130px;
+}
+
+#profileArea #changeArea #enterProfile {
+  width: 75px;
+  height: 38px;
+  margin-top: 5px;
+  margin-left: 30px;
+  background: dodgerblue;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border: 0;
+}
+
+#profileArea #changeArea #enterProfile:hover {
+  -webkit-filter: brightness(130%);
+          filter: brightness(130%);
+}
+
 @media screen and (min-width: 1200px) {
   .title {
     font-size: 120px !important;
   }
   .access {
     font-size: 30px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 15vw !important;
+  }
+  .access {
+    font-size: 5vw !important;
+  }
+  #google {
+    width: 50vw !important;
+  }
+  #search {
+    width: 70vw;
+    height: auto;
+    background: grey;
+    border: 2px solid black;
+  }
+  #search #container {
+    display: block !important;
+  }
+  #search p {
+    text-align: center !important;
+  }
+  #search #selectSport, #search #selectTime, #search #selectSetting, #search #selectTime, #search #selectSetting {
+    margin-left: 6vw !important;
+    margin-top: 8px;
+    font-size: 15px;
+    width: 55vw;
+  }
+  #search .btn {
+    margin-bottom: 10px;
+    width: 25vw;
+    margin-top: 6px;
+    margin-left: 22vw;
+  }
+  #search #close {
+    top: 65px;
+    left: 7px;
+    font-size: 5vw;
   }
 }
 /*# sourceMappingURL=index.css.map */

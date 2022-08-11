@@ -1,5 +1,6 @@
 body {
     overflow: hidden;
+    background: darkred;
 }
 
 .map {
@@ -64,10 +65,12 @@ body {
         filter: drop-shadow(0 0 30px black);
         font-size: 10vw;
         margin-bottom: 5vh;
+        user-select: none;
     }
     .access {
         filter: drop-shadow(0 0 10px black);
         font-size: 2.5vw;
+        user-select: none;
     }
     #google {
         width: 25vw;
@@ -77,6 +80,7 @@ body {
         margin-bottom: 8vh;
         cursor: pointer;
         transition: 0.2s;
+        border-radius: 10px;
         &:hover { filter: brightness(80%); }
     }
     #loginContainer {
@@ -115,7 +119,7 @@ body {
             filter: brightness(85%);
         }
     }
-    #close {
+    #searchClose {
         right: 7px;
         transition: 0.2s;
         cursor: pointer;
@@ -149,11 +153,103 @@ body {
     }
 }
 
+#profileArea {
+    width: 100%;
+    height: auto;
+    background: grey;
+    border-bottom: 2px solid black;
+    #profileClose {
+        right: 7px;
+        transition: 0.2s;
+        cursor: pointer;
+        &:hover {
+            color: white;
+        }
+    }
+    #profileLine {
+        width: 100%;
+        height: 2px;
+        background: black;
+    }
+    #changeArea {
+        background: lightgrey;
+        padding-top: 5px;
+        padding-bottom: 8px;
+        #selectAge {
+            margin-top: 5px;
+            margin-left: 10px;
+            height: 35px;
+            font-size: 15px;
+            width: 60px;
+        }
+        #selectType {
+            @extend #selectAge;
+            width: 20vw;
+            min-width: 130px;
+            max-width: 300px;
+        }
+        #typeDescription {
+            @extend #selectAge;
+            width: 65vw;
+            min-width: 130px;
+        }
+        #enterProfile {
+            width: 75px;
+            height: 38px;
+            margin-top: 5px;
+            margin-left: 30px;
+            background: dodgerblue;
+            transition: 0.3s;
+            border: 0;
+            &:hover {
+                filter: brightness(130%);
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 1200px) {
     .title {
         font-size: 120px !important;
     }
     .access {
         font-size: 30px !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .title {
+        font-size: 15vw !important;
+    }
+    .access {
+        font-size: 5vw !important;
+    }
+    #google {
+        width: 50vw !important;
+    }
+    #search {
+        width: 70vw;
+        height: auto;
+        background: grey;
+        border: 2px solid black;
+        #container { display: block !important; }
+        p { text-align: center !important; }
+        #selectSport, #selectTime, #selectSetting {
+            margin-left: 6vw !important;
+            margin-top: 8px;
+            font-size: 15px;
+            width: 55vw;
+        }
+        .btn {
+            margin-bottom: 10px;
+            width: 25vw;
+            margin-top: 6px;
+            margin-left: 22vw;
+        }
+        #close {
+            top: 65px;
+            left: 7px;
+            font-size: 5vw;
+        }
     }
 }
