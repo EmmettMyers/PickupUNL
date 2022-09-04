@@ -42,6 +42,7 @@ socket.on('getSearch', places => {
     }
 });
 
+// returhs results of player search
 function Result(place){
     var time = place.time.charAt(0)+":00 "+place.time.slice(-1).toUpperCase()+".M.";
     var sport = place.sport.charAt(0).toUpperCase() + place.sport.slice(1);
