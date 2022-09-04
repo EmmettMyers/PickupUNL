@@ -16,7 +16,6 @@ var sport;
 var time;
 
 // popup shown when point on map is clicked
-
 function Pop(facility){
   
   place = facility.name;
@@ -79,7 +78,6 @@ function Pop(facility){
 };;
                
 // inserts signup page and chat into popup box
-               
 function showInteract(){
   const interact = ReactDOM.createRoot(document.getElementById('interact'));
   if (sport && time){
