@@ -1,20 +1,22 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
 
+// firebase configuration, can't show details
 const firebaseConfig = {
-  apiKey: "AIzaSyBzFgK46mm-ljicVeO1mzYfOOI_TnepNmg",
-  authDomain: "pickupunl.firebaseapp.com",
-  projectId: "pickupunl",
-  storageBucket: "pickupunl.appspot.com",
-  messagingSenderId: "836685069435",
-  appId: "1:836685069435:web:2b9c8780182765e91636de",
-  measurementId: "G-PTGQDDCKEE"
+  apiKey: " CANNOT SHOW ",
+  authDomain: " CANNOT SHOW ",
+  projectId: " CANNOT SHOW ",
+  storageBucket: " CANNOT SHOW ",
+  messagingSenderId: " CANNOT SHOW ",
+  appId: " CANNOT SHOW ",
+  measurementId: " CANNOT SHOW "
 };
 
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
+// fetches google data from login
 document.getElementById("google").addEventListener("click", function() {
     signInWithPopup(auth, provider)
     .then((result) => {
