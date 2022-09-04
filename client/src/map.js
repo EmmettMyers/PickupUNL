@@ -1,3 +1,5 @@
+// creates interactive map of campus, adds points where sports facilities are
+
 import {Circle, Fill, Stroke, Style} from 'ol/style';
 import {Feature, Map, Overlay, View} from 'ol/index';
 import {OSM, Vector as VectorSource} from 'ol/source';
