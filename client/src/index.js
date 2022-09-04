@@ -10,6 +10,7 @@ if (getUser() === null || getUser() == ""){
   document.getElementById("login").style.display = "block"; 
 }
 
+// calls Pop component to display popup for facility clicked
 function popup(facility){
   const popup = ReactDOM.createRoot(document.getElementById('popup'));
   popup.render(
