@@ -17,7 +17,7 @@ Some of its features include:
  - Google Authentication login system
 
  
- Tools Used:
+  <b>Tools Used:</b>
   - JavaScript - React, Node
   - MySQL
   - CSS - Bootstrap, Sass
