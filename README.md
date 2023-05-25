@@ -6,6 +6,8 @@
 
 [Live Demo](https://drive.google.com/file/d/137ThzYqqBBeXxhHGenjB2Tm3HvgjQ-si/view)
 
+<i>Created: Summer 2022 (Incoming College Freshman)</i>
+  
 PickupUNL is a web application for signing up for pickup sports games around the University of Nebraska.
 
 Some of its features include:
