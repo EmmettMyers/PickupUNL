@@ -4,7 +4,7 @@
  
  <a href="https://drive.google.com/uc?export=view&id=1nUO9giPCiikzr8Mc4DC6xZZY4xm1iIV1"><img src="https://drive.google.com/uc?export=view&id=1nUO9giPCiikzr8Mc4DC6xZZY4xm1iIV1" style="width: 400px; max-width: 100%; height: auto" title="Click to enlarge picture" />
 
-[Live Demo](https://drive.google.com/file/d/137ThzYqqBBeXxhHGenjB2Tm3HvgjQ-si/view) | <i>Created: Summer 2022 (Incoming College Freshman)</i>
+[Live Demo](https://drive.google.com/file/d/137ThzYqqBBeXxhHGenjB2Tm3HvgjQ-si/view)  |  <i>Created: Summer 2022 (Incoming College Freshman)</i>
   
 <b>PickupUNL is a web application for signing up for pickup sports games around the University of Nebraska.</b>
 
