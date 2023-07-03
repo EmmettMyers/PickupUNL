@@ -20,8 +20,7 @@ Some of its features include:
   <b>Tools Used:</b>
   - JavaScript - React, Node
   - MySQL
-  - CSS - Bootstrap, Sass
-  - HTML
+  - HTML/CSS - Bootstrap, Sass
   - Firebase
   - Socket.IO, OpenLayers
   
