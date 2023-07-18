@@ -13,90 +13,69 @@ body {
 #mainNav {
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
   background: darkred;
   border-bottom: 2px solid white;
 }
-
 #mainNav #menuLogo {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
+  filter: invert(100%);
   width: 40px;
   cursor: pointer;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-
 #mainNav #menuLogo:hover, #mainNav #menuLogo.active {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
 }
-
 #mainNav .dropdown-menu {
-  -webkit-filter: drop-shadow(0 0 5px grey);
-          filter: drop-shadow(0 0 5px grey);
+  filter: drop-shadow(0 0 5px grey);
   min-width: 120px !important;
   margin: 8px;
   background: white !important;
   border: 3px solid darkred;
 }
-
 #mainNav .dropdown-menu .dropdown-item {
   cursor: pointer;
   text-align: center;
   color: darkred;
   font-weight: bold;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-
 #mainNav .dropdown-menu .dropdown-item:hover {
   background: white !important;
   color: black;
 }
 
 #login {
-  display: none;
   z-index: 1;
   width: 100vw;
   height: 100vh;
   background: darkred;
   position: absolute;
 }
-
 #login #backgroundImg {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  opacity: .2;
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
   height: 100%;
 }
-
 #login .title {
-  -webkit-filter: drop-shadow(0 0 30px black);
-          filter: drop-shadow(0 0 30px black);
+  filter: drop-shadow(0 0 30px black);
   font-size: 10vw;
   margin-bottom: 5vh;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
-
 #login .access {
-  -webkit-filter: drop-shadow(0 0 10px black);
-          filter: drop-shadow(0 0 10px black);
+  filter: drop-shadow(0 0 10px black);
   font-size: 2.5vw;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
-
 #login #google {
   width: 25vw;
   max-width: 300px;
@@ -104,23 +83,18 @@ body {
   margin-top: 1vh;
   margin-bottom: 8vh;
   cursor: pointer;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   border-radius: 10px;
 }
-
 #login #google:hover {
-  -webkit-filter: brightness(80%);
-          filter: brightness(80%);
+  filter: brightness(80%);
 }
-
 #login #loginContainer {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   text-align: center;
 }
 
@@ -130,7 +104,6 @@ body {
   background: grey;
   border-bottom: 2px solid black;
 }
-
 #search #selectSport, #search #selectTime, #search #selectSetting {
   margin-top: 8px;
   margin-left: 15px;
@@ -140,58 +113,46 @@ body {
   min-width: 130px;
   max-width: 300px;
 }
-
 #search #selectTime, #search #selectSetting {
   margin-left: 5px;
 }
-
 #search .btn {
   width: 75px;
   height: 40px;
   margin-top: 6px;
   margin-left: 10px;
   background: lime;
-  -webkit-transition: 0.3s;
   transition: 0.3s;
   border: 0;
 }
-
 #search .btn:hover {
-  -webkit-filter: brightness(85%);
-          filter: brightness(85%);
+  filter: brightness(85%);
 }
-
 #search #searchClose {
   right: 7px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   cursor: pointer;
 }
-
 #search #searchClose:hover {
   color: white;
 }
-
 #search #resultArea {
   background: gold;
   margin-top: 3px;
   border-top: 2px solid black;
 }
-
 #search #resultArea .titles div {
   font-weight: 700;
   width: 100%;
   text-align: center;
   border-bottom: 1px solid black;
 }
-
 #search #resultArea .result div {
   background: white;
   width: 100%;
   padding: 5px;
   border: 1px solid black;
 }
-
 #search #noResults {
   background: gold;
   margin-top: 3px;
@@ -204,63 +165,51 @@ body {
   background: grey;
   border-bottom: 2px solid black;
 }
-
 #profileArea #profileClose {
   right: 7px;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
   cursor: pointer;
 }
-
 #profileArea #profileClose:hover {
   color: white;
 }
-
 #profileArea #profileLine {
   width: 100%;
   height: 2px;
   background: black;
 }
-
 #profileArea #changeArea {
   background: lightgrey;
   padding-top: 5px;
   padding-bottom: 8px;
 }
-
-#profileArea #changeArea #selectAge, #profileArea #changeArea #selectType, #profileArea #changeArea #typeDescription {
+#profileArea #changeArea #selectAge, #profileArea #changeArea #typeDescription, #profileArea #changeArea #selectType {
   margin-top: 5px;
   margin-left: 10px;
   height: 35px;
   font-size: 15px;
   width: 60px;
 }
-
 #profileArea #changeArea #selectType {
   width: 20vw;
   min-width: 130px;
   max-width: 300px;
 }
-
 #profileArea #changeArea #typeDescription {
   width: 65vw;
   min-width: 130px;
 }
-
 #profileArea #changeArea #enterProfile {
   width: 75px;
   height: 38px;
   margin-top: 5px;
   margin-left: 30px;
   background: dodgerblue;
-  -webkit-transition: 0.3s;
   transition: 0.3s;
   border: 0;
 }
-
 #profileArea #changeArea #enterProfile:hover {
-  -webkit-filter: brightness(130%);
-          filter: brightness(130%);
+  filter: brightness(130%);
 }
 
 @media screen and (min-width: 1200px) {
@@ -271,7 +220,6 @@ body {
     font-size: 30px !important;
   }
 }
-
 @media screen and (max-width: 500px) {
   .title {
     font-size: 15vw !important;
@@ -294,7 +242,7 @@ body {
   #search p {
     text-align: center !important;
   }
-  #search #selectSport, #search #selectTime, #search #selectSetting, #search #selectTime, #search #selectSetting {
+  #search #selectSport, #search #selectTime, #search #selectSetting {
     margin-left: 6vw !important;
     margin-top: 8px;
     font-size: 15px;
@@ -311,5 +259,4 @@ body {
     left: 7px;
     font-size: 5vw;
   }
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

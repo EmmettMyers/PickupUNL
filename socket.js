@@ -10,12 +10,19 @@ con.connect(function(err) {
   console.log('sql connected'); 
 });
 
-const io = require('socket.io')();
-io.listen(5000, {
-  cors: {
-    origin: ["http://localhost:3000"]
-  }
+const http = require('http').createServer();
+const io = require('socket.io')(http, {
+    cors: { origin: "*" }
 });
+http.listen(5000, () => console.log('listening on http://localhost:5000') );
+
+/*var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 5000; 
+
+server.listen(port);*/
 
 io.on('connection', (socket) => {
   console.log('socket connected');
@@ -25,7 +32,6 @@ io.on('connection', (socket) => {
     con.query(sql, function (err, result) {
       if (err) throw err;
       if (result.length == 0){
-        console.log("uye");
         sql = "INSERT INTO profiles (id,user,picture,age,competition,email,description) VALUES ('"+cred[0]+"','"+cred[1]+"','"+cred[2]+"',0,'','"+cred[3]+"','')";
         con.query(sql, function (err, result) { if (err) throw err; });
       }
@@ -63,7 +69,7 @@ io.on('connection', (socket) => {
         con.query(sql, function (err, result) { if (err) throw err; });
         io.emit('signup', `${sign[0]}` );
       }
-    });    
+    });
   });
 
   socket.on('unSignup', (del) =>     {
