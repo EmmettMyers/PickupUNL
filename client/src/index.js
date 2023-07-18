@@ -55,8 +55,12 @@ export function home(navigation){
   }
 }
 
+<<<<<<< HEAD
 home();
 
+=======
+// calls Pop component to display popup for facility clicked
+>>>>>>> 2cafdaf8c2dd0966f6f4257b731e344d99780688
 function popup(facility){
   const popup = ReactDOM.createRoot(document.getElementById('popup'));
   popup.render(

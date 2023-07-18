@@ -2,8 +2,8 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Legost8045.24219",
-  database: "pickupunl"
+  password: "",
+  database: ""
 });
 con.connect(function(err) { 
   if (err) throw err; 
@@ -15,6 +15,7 @@ const io = require('socket.io')(http, {
     cors: { origin: "*" }
 });
 http.listen(5000, () => console.log('listening on http://localhost:5000') );
+<<<<<<< HEAD
 
 /*var express = require('express');
 var app = express();
@@ -23,6 +24,8 @@ var io = require('socket.io')(server);
 var port = process.env.PORT || 5000; 
 
 server.listen(port);*/
+=======
+>>>>>>> 2cafdaf8c2dd0966f6f4257b731e344d99780688
 
 io.on('connection', (socket) => {
   console.log('socket connected');
@@ -137,6 +140,7 @@ io.on('connection', (socket) => {
     });
   });
 
+<<<<<<< HEAD
   socket.on('reset', () =>     {
     var sql = "DELETE FROM chats";
     con.query(sql, function (err, result) { if (err) throw err; });
@@ -145,3 +149,8 @@ io.on('connection', (socket) => {
   });
 
 });
+=======
+});
+
+http.listen(8080, () => console.log('listening on http://localhost:8080') );
+>>>>>>> 2cafdaf8c2dd0966f6f4257b731e344d99780688
