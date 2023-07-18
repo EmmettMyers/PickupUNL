@@ -15,7 +15,6 @@ const io = require('socket.io')(http, {
     cors: { origin: "*" }
 });
 http.listen(5000, () => console.log('listening on http://localhost:5000') );
-<<<<<<< HEAD
 
 /*var express = require('express');
 var app = express();
@@ -24,8 +23,6 @@ var io = require('socket.io')(server);
 var port = process.env.PORT || 5000; 
 
 server.listen(port);*/
-=======
->>>>>>> 2cafdaf8c2dd0966f6f4257b731e344d99780688
 
 io.on('connection', (socket) => {
   console.log('socket connected');
